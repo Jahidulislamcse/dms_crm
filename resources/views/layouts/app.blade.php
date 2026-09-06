@@ -90,8 +90,10 @@
                     </a>
 
                     <!-- SALES & PROSPECTS -->
+                    @if(auth()->user()->canAccess('crm') || auth()->user()->canAccess('meetings') || auth()->user()->canAccess('requisitions'))
                     <div class="px-3 pt-4 pb-2 text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Sales & Prospects</div>
 
+                    @if(auth()->user()->canAccess('crm'))
                     <a href="{{ route('crm.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('crm.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-filter-circle-dollar w-4 text-center"></i>
                         <span>CRM Pipeline</span>
@@ -102,7 +104,9 @@
                         </span>
                         @endif
                     </a>
+                    @endif
 
+                    @if(auth()->user()->canAccess('meetings'))
                     <a href="{{ route('meetings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('meetings.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-calendar-check w-4 text-center"></i>
                         <span>Meetings Schedule</span>
@@ -113,7 +117,9 @@
                         </span>
                         @endif
                     </a>
+                    @endif
 
+                    @if(auth()->user()->canAccess('requisitions'))
                     <a href="{{ route('requisitions.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('requisitions.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-clipboard-check w-4 text-center"></i>
                         <span>Requisitions Hub</span>
@@ -124,29 +130,40 @@
                         </span>
                         @endif
                     </a>
+                    @endif
+                    @endif
 
                     <!-- CLIENT OPERATIONS -->
+                    @if(auth()->user()->canAccess('clients'))
                     <div class="px-3 pt-4 pb-2 text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Client Operations</div>
 
                     <a href="{{ route('clients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('clients.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-users w-4 text-center"></i>
                         <span>Clients Management</span>
                     </a>
+                    @endif
 
                     <!-- AGENCY MANAGEMENT -->
+                    @if(auth()->user()->canAccess('team') || auth()->user()->canAccess('services'))
                     <div class="px-3 pt-4 pb-2 text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Agency Management</div>
 
+                    @if(auth()->user()->canAccess('team'))
                     <a href="{{ route('team.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('team.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-user-gear w-4 text-center"></i>
                         <span>Team & Roles</span>
                     </a>
+                    @endif
 
+                    @if(auth()->user()->canAccess('services'))
                     <a href="{{ route('services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('services.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
                         <i class="fa fa-tags w-4 text-center"></i>
                         <span>Services Catalog</span>
                     </a>
+                    @endif
+                    @endif
 
                     <!-- FINANCIAL OVERSIGHT -->
+                    @if(auth()->user()->isOwner())
                     <div class="px-3 pt-4 pb-2 text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Financial Oversight</div>
 
                     <a href="{{ route('invoices.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all {{ request()->routeIs('invoices.*') ? 'bg-gradient-to-r from-brand-500 to-amber-600 text-white shadow-md shadow-amber-500/20' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white' }}">
@@ -158,6 +175,7 @@
                         <i class="fa fa-receipt w-4 text-center"></i>
                         <span>Expenses</span>
                     </a>
+                    @endif
                 </nav>
             </div>
 

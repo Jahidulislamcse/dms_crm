@@ -10,6 +10,10 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->isOwner()) {
+            abort(403, 'Access denied. Only Super Admin / Owner can manage team members & roles.');
+        }
+
         $query = User::query();
 
         if ($request->filled('role')) {

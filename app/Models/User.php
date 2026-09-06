@@ -49,6 +49,27 @@ class User extends Authenticatable
         return in_array($this->role, ['designer', 'motion', 'video', 'seo', 'developer', 'mediabuyer']);
     }
 
+    public function canAccess(string $module): bool
+    {
+        if ($this->isOwner()) {
+            return true;
+        }
+
+        $permissions = [
+            'sales' => ['dashboard', 'crm', 'meetings', 'requisitions', 'clients'],
+            'smm' => ['dashboard', 'clients', 'meetings'],
+            'designer' => ['dashboard', 'meetings'],
+            'motion' => ['dashboard', 'meetings'],
+            'video' => ['dashboard', 'meetings'],
+            'seo' => ['dashboard', 'meetings'],
+            'developer' => ['dashboard', 'meetings'],
+            'mediabuyer' => ['dashboard', 'meetings'],
+        ];
+
+        $allowedModules = $permissions[$this->role] ?? ['dashboard'];
+        return in_array($module, $allowedModules);
+    }
+
     public function assignedClients()
     {
         return $this->hasMany(Client::class, 'assigned_smm');
